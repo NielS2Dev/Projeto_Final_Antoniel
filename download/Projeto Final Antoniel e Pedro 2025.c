@@ -10,8 +10,9 @@
 
 // funções basicas.
 void definirCorTexto(int cor) {
+	// Altera a cor do texto no console do Windows.
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), cor);
-    /* Colinha da tabela de cores kk
+    /* Colinha da tabela das cores.
      0  - Preto (Black)
 	 1  - Azul
 	 2  - Verde
@@ -33,12 +34,14 @@ void definirCorTexto(int cor) {
 
 
 void animacao(int x, int y) {
+	// Utilizado para efeitos de animação no terminal das letras "aparecendo".
     COORD coord = { (SHORT)x, (SHORT)y };
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
 
 void print_animado_multilinha(const char *linhas[], int num_linhas, int delay_ms) {
+	// Mostra várias linhas de texto com animação caractere por caractere.
     int max_len = 0;
     int i = 0, pos = 0, linha = 0;
     
@@ -66,6 +69,7 @@ void print_animado_multilinha(const char *linhas[], int num_linhas, int delay_ms
 // Imagens em art ASCII
 
 void pedra(){
+	// Seria uma imagem para representar a pedra, mas não consegui fazer uma imagem melhor que essa.
 	definirCorTexto(3);
     printf("                                                           \n");
     printf("        --:::---::::----:                                 \n");
@@ -93,6 +97,7 @@ void pedra(){
 
 
 void papel(){
+	// Imagem para representar um papel, achei essa imagem do livro e consegui deixar ela mais "didática".
 	definirCorTexto(2);
 	printf("         ,..........   ..........,         \n");
     printf("     ,..,'          '.'          ',..,     \n");
@@ -108,6 +113,7 @@ void papel(){
 
 
 void tesoura(){
+		// Imagem para representar a tesoura.
 		definirCorTexto(6);
 	    printf(
         "    ########                                      \n"
@@ -132,6 +138,7 @@ void tesoura(){
 // Textos em art ASCII
 
 void textoPedra(){
+	// Texto em ART ASCII
     const char *arte[] = {
         " _______  _______  ______   ______    _______ ",
         "|       ||       ||      | |    _ |  |   _   |",
@@ -150,6 +157,7 @@ void textoPedra(){
 
 
 void textoPapel(){
+	// Texto em ART ASCII
     const char *arte[] = {
         " _______  _______  _______  _______  ___     ",
         "|       ||   _   ||       ||       ||   |    ",
@@ -168,6 +176,7 @@ void textoPapel(){
 
 
 void textoTesoura() {
+	// Texto em ART ASCII
     const char *arte[] = {
         " _______  _______  _______  _______  __   __  ______    _______ ",
         "|       ||       ||       ||       ||  | |  ||    _ |  |   _   |",
@@ -186,6 +195,7 @@ void textoTesoura() {
 
 
 void pedraPapelTesoura(){
+	// Texto em ART ASCII
 	definirCorTexto(10);
 	printf(" ___  ___  __   ___   _       ___   _   ___  ___  _     ___    ___  ___  __   _   _ _  ___   _  \n");
     printf("| o \\| __||  \\ | o \\ / \\     | o \\ / \\ | o \\| __|| |   | __|  |_ _|| __|/ _| / \\ | | || o \\ / \\ \n");
@@ -196,8 +206,8 @@ void pedraPapelTesoura(){
 }
 
 
-
 void inicioJogo(){
+	// Texto em ART ASCII
 	definirCorTexto(2);
 	printf("  ___   _  _   ___    ___   ___     _     ___      ___         _    ___     ___    ___  \n");
     printf(" |_ _| | \\| | |_ _|  / __| |_ _|   /_\\   | _ \\    / _ \\     _ | |  / _ \\   / __|  / _ \\ \n");
@@ -209,6 +219,7 @@ void inicioJogo(){
 
 
 void gameover(){
+	// Texto em ART ASCII
 	printf("  _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______      \n");
 	printf(" /  _____|    /   \\     |   \\/   | |   ____|    /  __  \\  \\   \\  /   / |   ____||   _  \\     \n");
 	printf("|  |  __     /  ^  \\    |  \\  /  | |  |__      |  |  |  |  \\   \\/   /  |  |__   |  |_)  |    \n");
@@ -222,6 +233,7 @@ void gameover(){
 
 void parteInicial(){
 	// fiz esse void para ficar mais organizado o meu principal "Main".
+	// Ele mostra o texto animada em seguida da imagem e logo após um Sleep de 2 Segundos dou um "clean" no console e passo para a próximo texto e imagem.
 	textoPedra();
 	pedra();
 	Sleep(2000);
@@ -240,14 +252,13 @@ void parteInicial(){
 
 
 void exibirCabecalho() {
+	// Cabecalho do jogo.
     definirCorTexto(14);
     printf("==========================================================================================================\n");
     printf("                                       JOGO: PEDRA, PAPEL E TESOURA\n");
     printf("==========================================================================================================\n");
     definirCorTexto(7);
 }
-
-
 
 
 
@@ -267,16 +278,45 @@ int main(){
 	exibirCabecalho();
 	
 	
-	// Jogo propriamente dito!
+	// Declarações de variáveis que irei utilizar, embora tenha outras de alguns for que declarei dentro do do-while.
 	int opcaoJogador, opcaoMaquina, pontosJogador;
+	int rodada = 1;
+	int ultimaJogadaJogador = 0;
 	
 	do {
 		pedraPapelTesoura();
-		opcaoMaquina = rand() % 3 + 1;
+		
+		
+		/* Esse seria o sistema de "IA" sem usar uma biblioteca externa.
+		em que esse algoritimo não irá escolher aleatoriamente um valor usando apenas opcaoMaquina = rand() % 3 + 1; essa "IA" sempre vai escolher um valor baseado na jogada anterior
+		do jogador ou seja se o jogador jogou na jogada anterior papel, então a ia vai escolher um objeto que vença a escolha anterior do jogador ou seja nesse caso iria escolher tesoura
+		para a próxima rodada*/
+		
+		if (rodada == 1 || ultimaJogadaJogador == 0){
+			// Primeira rodada, escolha aleatória
+   			opcaoMaquina = rand() % 3 + 1;
+		} else {
+			// IA: tenta vencer a jogada anterior do jogador
+			if (ultimaJogadaJogador == 1){
+				opcaoMaquina = 2; // Papel vence Pedra
+			} else if (ultimaJogadaJogador == 2){
+				opcaoMaquina = 3; // Tesoura vence Papel
+			} else if (ultimaJogadaJogador == 3){
+				opcaoMaquina = 1; // Pedra vence Tesoura
+			}
+		}
+
+
+
+		definirCorTexto(6);
+		printf("RODADA DE NÚMERO: %d°\n", rodada);
+		definirCorTexto(15);
+		// Gero um número aleatório e pega a sobra % da divisão por 3 que será 0, 1 ou 2 no entanto coloquei uma soma +1 para pegar as sobras "1, 2 ou 3". Coração do meu código.
+	
+
 
 		// Deixei essa parte aqui
 		// coloquei essa parte para ele ficar testando o programa ja sabendo oq o computador tinha "escolhido".
-		
 		/*
 		if(opcaoMaquina == 1){
 	    		definirCorTexto(14);
@@ -299,20 +339,25 @@ int main(){
 		definirCorTexto(15);
 		printf("Escolha alguma das opções abaixo:\n1 - Pedra\n2 - Papel\n3 - Tesoura\n4 - Finalizar Programa\n");
 		printf("Digite o número correpondente a sua escolha: ");
-		scanf("%d", &opcaoJogador);	
+		scanf("%d", &opcaoJogador);	//Armazena a opção que eu escolhi.
+		ultimaJogadaJogador = opcaoJogador;
 		definirCorTexto(7);
 		
 
-		if (opcaoJogador <1 || opcaoJogador > 4){
+		if (opcaoJogador <1 || opcaoJogador > 4){ 
+		// Caso o número seja menor que 1 ou maior que 4 que são as entradas válida, o programa retorna um erro pedindo um número válido.
 		definirCorTexto(4);
 		printf("\nDigite algum número válido!, amigo(a)!!!\n");
 		printf("Os valores são...\n\n");
 		definirCorTexto(7);
+		Sleep(1000);
+		system("CLS");
 		continue;
 		}
 		
 		
 		if (opcaoJogador == 4){
+			// Caso a opção seja 4 o meu programa é finalizado, adicionei um for para mostrar uma animaçãozinha antes de mostrar a mensagem de "GAME OVER".
 			printf("Programa Finalizando!\n");
 			int temp = 0;
 			for (temp = 3; temp >= 0; temp--){
@@ -328,6 +373,7 @@ int main(){
 		
 		
 		if (opcaoJogador == opcaoMaquina){
+			// Caso a mesma opção que o jogador escolher seja a mesma da máquina no caso empate, vai aparecer a mensagem de "EMPATE" e antes a mensagem do que o computador "escolheu".
 			definirCorTexto(3);
 			system("cls");
 			if(opcaoMaquina == 1){
@@ -348,9 +394,12 @@ int main(){
 			printf("                                               EMPATE!!                                                    \n");
 			printf("------------------------------------------------------------------------------------------------------------\n");
 			definirCorTexto(15);
+			// Como aqui não há mudança na pontuação do jogador, então só mostra a pontuação do jogador sem nenhuma alteração até então.
 			printf("Pontuação atual [%d] Pontos.\n", pontosJogador);
 
 		} else if ((opcaoJogador == 1 && opcaoMaquina == 3) || (opcaoJogador == 2 && opcaoMaquina == 1) || (opcaoJogador == 3 && opcaoMaquina== 2)){
+			// Essa são as possibilidades correspondente as opção que o jogador pode escolher para vencer a maquina, Caso alguma dessas possobilidades ocorra.
+			//Irá aparecer a mensagem de "VOCÊ VENCEU" e antes a mensagem do que o computador "escolheu".
 			definirCorTexto(2); 
 			system("cls");
 			if(opcaoMaquina == 1){
@@ -371,8 +420,10 @@ int main(){
 			printf("------------------------------------------------------------------------------------------------------------\n");
 			definirCorTexto(15);
 			printf("Pontuação atual [%d] Pontos.\n", pontosJogador);
+			// Como aqui o jogador venceu, então é incrementado "+1" ponto da sua pontuação total.
 			pontosJogador ++;
 		} else{
+			// Essa são os restantes das possibilidades que é no caso de "VÍTORIA DA MÁQUINA" Mostrando a mensagem que a "MÁQUINA VENCEU" junto a qual "OPÇÃO A MÁQUINA ESCOLHEU".
 			definirCorTexto(4);
 			system("cls");
 			if(opcaoMaquina == 1){
@@ -393,9 +444,10 @@ int main(){
 			printf("------------------------------------------------------------------------------------------------------------\n");
 			definirCorTexto(15);
 			printf("Pontuação atual [%d] Pontos.\n", pontosJogador);
+			// Como aqui o jogador perder, então é descontando "-1" ponto da sua pontuação total.
 			pontosJogador --;
 		}
-		
+	rodada++;	
 
 		
 	} while(1);
