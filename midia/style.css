@@ -1,0 +1,182 @@
+@charset "UTF-8";
+
+@media (max-width: 900px) {
+#download-box {display: none;}
+#div_secundaria {display: none;}
+}
+
+@keyframes subir {
+    0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    }
+    100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1.5);
+    }
+}
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* CORREÇÃO importante para o conteúdo aparecer */
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Vídeo fundo */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Container do jogo */
+#game-container {
+    width: 350px;
+    min-height: 400px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #444;
+    border-radius: 10px;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px #00000044;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    position: relative; /* importante para ficar na frente do vídeo */
+    z-index: 1;
+    transition: background-color 0.5s, backdrop-filter 0.5s;
+    border: 3px solid #444;
+}
+
+#game-container:hover{
+    background-color: rgba(10, 57, 143, 0.377);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+}
+
+#game-result {
+    margin-top: 20px;
+    min-height: 40px;
+    font-weight: bold;
+}
+
+button {
+    font-size: 1.1rem;
+    margin: 10px 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #555;
+    background-color: #eee;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+/* Rodapé fixo */
+footer > a {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px 0;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    transition: transform 0.4s, color 0.4s, font-size 0.2s, text-shadow 0.2s;
+}
+
+footer > a:hover {
+    transform: translate(-1.2px, -1.2px);
+    font-size: 21px;
+    color: rgb(228, 7, 217);
+    text-shadow: 1px 1px 1px rgb(221, 13, 13);
+}
+
+#git_hub {
+    width: 2%;
+    bottom: 90px;
+}
+
+
+.coroa-voando {
+    position: fixed;
+    font-size: 36px;
+    pointer-events: none; /* para não interferir no clique */
+    animation: subir 1.5s forwards;
+    user-select: none;
+    z-index: 9999;
+}
+
+#div_secundaria{
+    backdrop-filter: blur(8px); /* <- aplica o blur */
+    border-radius: 20px;
+}
+
+#central{
+    padding: 5px;
+    text-indent: 20px;
+    text-align: justify;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    backdrop-filter: blur(8px); /* <- aplica o blur */
+
+}
+
+#div_principal {
+    display: flex;
+    flex-direction: column;
+}
+
+#download-box {
+    position: fixed;
+    top: 80px; /* distância do topo */
+    right: 20px; /* distância da lateral direita */
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 2px solid #444;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px #00000033;
+    z-index: 2;
+    font-family: Arial, sans-serif;
+}
+
+
+.download {
+    width: 20px;
+    vertical-align: middle; /* Alinha o meio da imagem com o meio do texto */
+    margin-right: 8px; /* Espaço entre imagem e texto */
+}
+
+
+h2{
+    color: white;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: bolder;
+}
+
+#game-result {
+    color: white;
+}
+
+
+#score p {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+}

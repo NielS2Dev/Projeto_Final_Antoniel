@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projeto Final</title>
+    <link rel="stylesheet" href="midia/style.css" />
+
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="NielS2 - Meu Portfólio">
+    <meta property="og:description" content="NielS2- Este é o meu projeto de portfólio!">
+    <meta property="og:image" content="https://i.postimg.cc/GpSzGrdy/NielS2.jpg">
+    <meta property="og:url" content="https://niels2dev.github.io/portfolio/">
+    <meta property="og:type" content="website">
+
+<link rel="stylesheet" href="style/style.css">
+<link rel="shortcut icon" href="icon/pasta-icone.ico" type="image/x-icon">
+</head>
+<body>
+  <video src="midia/wallpaper.mp4" id="background-video" autoplay loop muted></video>
+
+  <div id="div_principal">
+    <div id="div_secundaria">
+        <p id="central">Como estou estudando HTML, CSS e JavaScript, decidi criar uma versão do jogo usando essas tecnologias antes de me aprofundar em frameworks e APIs. Embora eu tenha me baseado no código-fonte da minha atividade em C, consegui ir um pouco além. O uso de emojis e outros recursos visuais torna tudo mais fácil e esteticamente agradável. No geral, fiz essa parte mais como um exercício de aprendizado, com o objetivo de aprimorar minhas técnicas de programação.
+    </div>
+
+    <div id="game-container">
+        <h2>Jogo: Pedra, Papel e Tesoura</h2>
+        <div id="choices">
+          <button data-choice="pedra">✊ Pedra</button>
+          <button data-choice="papel">✋ Papel</button>
+          <button data-choice="tesoura">✌ Tesoura</button>
+        </div>
+        <div id="game-result"></div>
+        <div id="score">
+          <p>Pontos: <span id="player-score">0</span></p>
+        </div>
+        <button id="reset-game" style="display:none;">Reiniciar Jogo</button>
+    </div>
+  </div>
+
+  <div id="download-box">
+  <h3>Downloads</h3>
+  <a href="download/Projeto_Final_Antoniel HTML CSS E JS.rar" download><img src="midia/download-da-nuvem (2).png" alt="" class="download"> Versão Web (HTML, CSS, JS)</a><br>
+  <a href="download/Projeto Final Antoniel e Pedro.c" download><img src="midia/download-da-nuvem (2).png" alt="" class="download"> Versão em C</a>
+  <br>
+  <a href="https://niels2dev.github.io/Niel_Portfolio/" target="_blank"> <img src="midia/carregando.png" alt="" class="download">Projeto desenvolvimento...</a>
+  </div>
+
+  <footer>
+    <a id="footer_a" href="https://github.com/niels2dev" target="_blank">
+      <img src="midia/github_150.png" id="git_hub" alt="" />
+      Site em desenvolvimento pelo Antoniel
+    </a>
+  </footer>
+
+  <script src="scripts.script.js"></script>
+</body>
+</html>
